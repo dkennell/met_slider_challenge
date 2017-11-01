@@ -14,6 +14,16 @@
 //= require turbolinks
 //= require_tree .
 
+  var clickLoc = new Object;
+  clickLoc.x = 0;
+  clickLoc.y = 0;
+
+  var emptyLoc = new Object;
+  emptyLoc.x = 0;
+  emptyLoc.y = 0;
+
+  var solved = false
+
 window.onload = function(){
 	loadPuzzle()
 }
