@@ -75,9 +75,14 @@ document.getElementById('scale').onchange = function() {
       drawTiles();
     }
     if (solved) {
-      alert("You solved it!");
+    setTimeout(function() {alert("You solved it!");}, 500);
     }
   };
+
+ function distance(x1, y1, x2, y2) {
+    return Math.abs(x1 - x2) + Math.abs(y1 - y2);
+  }
+
 
 var context = document.getElementById("puzzle").getContext("2d");
 
