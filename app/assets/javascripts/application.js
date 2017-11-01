@@ -29,13 +29,22 @@ window.onload = function(){
 }
 
 loadPuzzle = function(){
-	  var img = new Image();
+  var img = new Image();
   img.src = 'http://www.brucealderman.info/Images/dimetrodon.jpg';
   img.addEventListener('load', drawTiles, false);
   var boardSize = document.getElementById('puzzle').width;
   var tileCount = document.getElementById('scale').value;
   var tileSize = boardSize / tileCount;
   var boardParts = new Object;
+
+document.getElementById('scale').onchange = function() {
+    tileCount = this.value;
+    tileSize = boardSize / tileCount;
+    setBoard();
+    drawTiles();
+  };
+
+
   setBoard();
 
   console.log("hi")
@@ -57,13 +66,6 @@ function setBoard() {
     solved = false;
   }
 
-document.getElementById('scale').onchange = function() {
-    tileCount = this.value;
-    tileSize = boardSize / tileCount;
-    setBoard();
-    drawTiles();
-  };
-
   document.getElementById('puzzle').onmousemove = function(e) {
     clickLoc.x = Math.floor((e.pageX - this.offsetLeft) / tileSize);
     clickLoc.y = Math.floor((e.pageY - this.offsetTop) / tileSize);
@@ -79,10 +81,47 @@ document.getElementById('scale').onchange = function() {
     }
   };
 
- function distance(x1, y1, x2, y2) {
+function distance(x1, y1, x2, y2) {
     return Math.abs(x1 - x2) + Math.abs(y1 - y2);
+}
+
+function slideTile(toLoc, fromLoc) {
+    if (!solved) {
+      boardParts[toLoc.x][toLoc.y].x = boardParts[fromLoc.x][fromLoc.y].x;
+      boardParts[toLoc.x][toLoc.y].y = boardParts[fromLoc.x][fromLoc.y].y;
+      boardParts[fromLoc.x][fromLoc.y].x = tileCount - 1;
+      boardParts[fromLoc.x][fromLoc.y].y = tileCount - 1;
+      toLoc.x = fromLoc.x;
+      toLoc.y = fromLoc.y;
+      checkSolved();
+    }
   }
 
+function checkSolved() {
+    var flag = true;
+    for (var i = 0; i < tileCount; ++i) {
+      for (var j = 0; j < tileCount; ++j) {
+        if (boardParts[i][j].x != i || boardParts[i][j].y != j) {
+          flag = false;
+        }
+      }
+    }
+    solved = flag;
+  }
+
+  function drawTiles() {
+    context.clearRect ( 0 , 0 , boardSize , boardSize );
+    for (var i = 0; i < tileCount; ++i) {
+      for (var j = 0; j < tileCount; ++j) {
+        var x = boardParts[i][j].x;
+        var y = boardParts[i][j].y;
+        if(i != emptyLoc.x || j != emptyLoc.y || solved == true) {
+          context.drawImage(img, x * tileSize, y * tileSize, tileSize, tileSize,
+              i * tileSize, j * tileSize, tileSize, tileSize);
+        }
+      }
+    }
+  }
 
 var context = document.getElementById("puzzle").getContext("2d");
 
