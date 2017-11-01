@@ -57,7 +57,27 @@ function setBoard() {
     solved = false;
   }
 
+document.getElementById('scale').onchange = function() {
+    tileCount = this.value;
+    tileSize = boardSize / tileCount;
+    setBoard();
+    drawTiles();
+  };
 
+  document.getElementById('puzzle').onmousemove = function(e) {
+    clickLoc.x = Math.floor((e.pageX - this.offsetLeft) / tileSize);
+    clickLoc.y = Math.floor((e.pageY - this.offsetTop) / tileSize);
+  };
+
+  document.getElementById('puzzle').onclick = function() {
+    if (distance(clickLoc.x, clickLoc.y, emptyLoc.x, emptyLoc.y) == 1) {
+      slideTile(emptyLoc, clickLoc);
+      drawTiles();
+    }
+    if (solved) {
+      alert("You solved it!");
+    }
+  };
 
 var context = document.getElementById("puzzle").getContext("2d");
 
