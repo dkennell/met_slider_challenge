@@ -21,7 +21,9 @@ window.onload = function(){
 loadPuzzle = function(){
   initializeGlobals()
   img = new Image();
-  img.src = 'http://www.brucealderman.info/Images/dimetrodon.jpg';
+  img.src = "http://images.metmuseum.org/CRDImages/ad/original/DT163.jpg";
+  img.width="50"
+  img.height="50"
   img.addEventListener('load', drawTiles, false);
   var boardParts = new Object;
   setBoard(tileCount);
