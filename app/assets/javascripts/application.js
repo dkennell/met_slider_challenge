@@ -83,7 +83,7 @@ function setListeners(){
 
     document.getElementById('puzzle').onclick = function() {
       if (distance(clickLoc.x, clickLoc.y, emptyLoc.x, emptyLoc.y) == 1) {
-        slideTile();
+        slideTile(emptyLoc, clickLoc);
         drawTiles();
       }
       
@@ -123,11 +123,10 @@ function checkSolved() {
 
   function drawTiles() {
     context.clearRect ( 0 , 0 , boardSize , boardSize );
-    debugger;
     for (var i = 0; i < tileCount; ++i) {
       for (var j = 0; j < tileCount; ++j) {
-        var x = boardParts[i][j].x;
-        var y = boardParts[i][j].y;
+        x = boardParts[i][j].x;
+        y = boardParts[i][j].y;
         if(i != emptyLoc.x || j != emptyLoc.y || solved == true) {
           context.drawImage(img, x * tileSize, y * tileSize, tileSize, tileSize,
               i * tileSize, j * tileSize, tileSize, tileSize);
