@@ -14,44 +14,45 @@
 //= require turbolinks
 //= require_tree .
 
-  var clickLoc = new Object;
-  clickLoc.x = 0;
-  clickLoc.y = 0;
-
-  var emptyLoc = new Object;
-  emptyLoc.x = 0;
-  emptyLoc.y = 0;
-
-  var solved = false
-
 window.onload = function(){
 	loadPuzzle()
 }
 
 loadPuzzle = function(){
-  var img = new Image();
+  initializeGlobals()
+  img = new Image();
   img.src = 'http://www.brucealderman.info/Images/dimetrodon.jpg';
   img.addEventListener('load', drawTiles, false);
-  var boardSize = document.getElementById('puzzle').width;
-  var tileCount = document.getElementById('scale').value;
-  var tileSize = boardSize / tileCount;
   var boardParts = new Object;
-
-document.getElementById('scale').onchange = function() {
-    tileCount = this.value;
-    tileSize = boardSize / tileCount;
-    setBoard();
-    drawTiles();
-  };
-
-
-  setBoard();
+  setBoard(tileCount);
+  setListeners()
 
   console.log("hi")
 
 }
 
-function setBoard() {
+
+function initializeGlobals(){
+  context = document.getElementById("puzzle").getContext("2d");
+
+  boardSize = document.getElementById('puzzle').width;
+  tileCount = document.getElementById('scale').value;
+  tileSize = boardSize / tileCount;
+
+  
+  clickLoc = new Object;
+  clickLoc.x = 0;
+  clickLoc.y = 0;
+
+  emptyLoc = new Object;
+  emptyLoc.x = 0;
+  emptyLoc.y = 0;
+
+  solved = false
+}
+
+
+function setBoard(tileCount) {
     boardParts = new Array(tileCount);
     for (var i = 0; i < tileCount; ++i) {
       boardParts[i] = new Array(tileCount);
@@ -66,20 +67,31 @@ function setBoard() {
     solved = false;
   }
 
-  document.getElementById('puzzle').onmousemove = function(e) {
-    clickLoc.x = Math.floor((e.pageX - this.offsetLeft) / tileSize);
-    clickLoc.y = Math.floor((e.pageY - this.offsetTop) / tileSize);
-  };
-
-  document.getElementById('puzzle').onclick = function() {
-    if (distance(clickLoc.x, clickLoc.y, emptyLoc.x, emptyLoc.y) == 1) {
-      slideTile(emptyLoc, clickLoc);
+function setListeners(){
+    
+    document.getElementById('scale').onchange = function() {
+      tileCount = this.value;
+      tileSize = boardSize / tileCount;
+      setBoard();
       drawTiles();
-    }
-    if (solved) {
-    setTimeout(function() {alert("You solved it!");}, 500);
-    }
-  };
+    };
+
+    document.getElementById('puzzle').onmousemove = function(e) {
+      clickLoc.x = Math.floor((e.pageX - this.offsetLeft) / tileSize);
+      clickLoc.y = Math.floor((e.pageY - this.offsetTop) / tileSize);
+    };
+
+    document.getElementById('puzzle').onclick = function() {
+      if (distance(clickLoc.x, clickLoc.y, emptyLoc.x, emptyLoc.y) == 1) {
+        slideTile();
+        drawTiles();
+      }
+      
+      if (solved) {
+        setTimeout(function() {alert("You solved it!");}, 500);
+      }
+    };
+  }
 
 function distance(x1, y1, x2, y2) {
     return Math.abs(x1 - x2) + Math.abs(y1 - y2);
@@ -111,6 +123,7 @@ function checkSolved() {
 
   function drawTiles() {
     context.clearRect ( 0 , 0 , boardSize , boardSize );
+    debugger;
     for (var i = 0; i < tileCount; ++i) {
       for (var j = 0; j < tileCount; ++j) {
         var x = boardParts[i][j].x;
@@ -123,7 +136,6 @@ function checkSolved() {
     }
   }
 
-var context = document.getElementById("puzzle").getContext("2d");
 
 
 
