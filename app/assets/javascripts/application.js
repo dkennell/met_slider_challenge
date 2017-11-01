@@ -22,9 +22,39 @@ loadPuzzle = function(){
 	  var img = new Image();
   img.src = 'http://www.brucealderman.info/Images/dimetrodon.jpg';
   img.addEventListener('load', drawTiles, false);
-  	console.log("hi")
+  var boardSize = document.getElementById('puzzle').width;
+  var tileCount = document.getElementById('scale').value;
+  var tileSize = boardSize / tileCount;
+  var boardParts = new Object;
+  setBoard();
+
+  console.log("hi")
 
 }
 
+function setBoard() {
+    boardParts = new Array(tileCount);
+    for (var i = 0; i < tileCount; ++i) {
+      boardParts[i] = new Array(tileCount);
+      for (var j = 0; j < tileCount; ++j) {
+        boardParts[i][j] = new Object;
+        boardParts[i][j].x = (tileCount - 1) - i;
+        boardParts[i][j].y = (tileCount - 1) - j;
+      }
+    }
+    emptyLoc.x = boardParts[tileCount - 1][tileCount - 1].x;
+    emptyLoc.y = boardParts[tileCount - 1][tileCount - 1].y;
+    solved = false;
+  }
+
+
+
 var context = document.getElementById("puzzle").getContext("2d");
+
+
+
+
+
+
+
 
