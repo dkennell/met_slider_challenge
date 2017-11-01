@@ -22,8 +22,8 @@ loadPuzzle = function(){
   initializeGlobals()
   img = new Image();
   img.src = "http://images.metmuseum.org/CRDImages/ad/original/DT163.jpg";
-  img.width="50"
-  img.height="50"
+
+  img.height="1%"
   img.addEventListener('load', drawTiles, false);
   var boardParts = new Object;
   setBoard(tileCount);
