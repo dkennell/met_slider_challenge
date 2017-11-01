@@ -13,3 +13,18 @@
 //= require rails-ujs
 //= require turbolinks
 //= require_tree .
+
+window.onload = function(){
+	loadPuzzle()
+}
+
+loadPuzzle = function(){
+	  var img = new Image();
+  img.src = 'http://www.brucealderman.info/Images/dimetrodon.jpg';
+  img.addEventListener('load', drawTiles, false);
+  	console.log("hi")
+
+}
+
+var context = document.getElementById("puzzle").getContext("2d");
+
