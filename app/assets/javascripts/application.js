@@ -41,26 +41,31 @@ loadPuzzle = function(){
   img = new Image();
   switch (document.getElementById("exhibit").value){
     case "tugra":
+      var name = "Tughra (Official Signature) of Sultan Süleiman the Magnificent (r. 1520–66)"
       var date = "ca. 1555–60"
       var medium = "Ink, opaque watercolor, and gold on paper"
       img.src = "https://images.metmuseum.org/CRDImages/is/original/DP234753.jpg"
       break;
     case "washstand":
+      var name = "Scottish Washstand (British, Glasgow, Scotland 1868–1928 London)"
       var date = "1904"
       var medium = "Oak, ceramic tile, colored and mirror glass, and lead"
       img.src = "https://images.metmuseum.org/CRDImages/ma/original/DT1424.jpg"
       break;
     case "statuette":
+      var name = "Greek Bronze statuette of a rider wearing an elephant skin"
       var date = "Hellenistic Period, 3rd century B.C."
       var medium = "Bronze"
       img.src = "https://images.metmuseum.org/CRDImages/gr/original/DP104920.jpg"
       break;
     case "bottle":
+      var name = "Peruvian Wari Feline Bottle"
       var date = "8th–10th century"
       var medium = "Ceramic"
       img.src = "https://images.metmuseum.org/CRDImages/ao/original/DT4041.jpg"
       break;
     case "armor":
+      var name = "Italian Armor"
       var date = "ca. 1400–1450 and later"
       var medium = "Steel, copper alloy, textile, leather"
       img.src = "https://images.metmuseum.org/CRDImages/aa/original/DT778.jpg";
@@ -68,6 +73,9 @@ loadPuzzle = function(){
 
   }
 
+  document.getElementById("name").innerHTML = name
+  document.getElementById("date").innerHTML = date
+  document.getElementById("medium").innerHTML = medium
 
   img.height="1%"
   img.addEventListener('load', drawTiles, false);
