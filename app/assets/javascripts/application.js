@@ -15,17 +15,9 @@
 //= require_tree .
 
 window.onload = function(){
-  loadStagingCanvas()
 	loadPuzzle()
 }
 
-loadStagingCanvas = function(){
-    c=document.getElementById("staging_canvas");
-    ctx=c.getContext("2d");
-    myImg = new Image();
-    myImg.src = "http://images.metmuseum.org/CRDImages/ad/original/DT163.jpg";
-    myImg.onload=start;
-}
 
 function start(){
   c.width=480;
@@ -47,7 +39,7 @@ function scalePreserveAspectRatio(imgW,imgH,maxW,maxH){
 loadPuzzle = function(){
   initializeGlobals()
   img = new Image();
-  img.src = "http://images.metmuseum.org/CRDImages/ad/original/DT163.jpg";
+  img.src = "https://images.metmuseum.org/CRDImages/aa/original/DT778.jpg";
 
   img.height="1%"
   img.addEventListener('load', drawTiles, false);
@@ -64,7 +56,7 @@ function initializeGlobals(){
   context = document.getElementById("puzzle").getContext("2d");
 
   boardSize = document.getElementById('puzzle').width;
-  tileCount = document.getElementById('scale').value;
+  tileCount = 4 //document.getElementById('scale').value;
   tileSize = boardSize / tileCount;
 
   
@@ -97,12 +89,12 @@ function setBoard(tileCount) {
 
 function setListeners(){
     
-    document.getElementById('scale').onchange = function() {
-      tileCount = this.value;
-      tileSize = boardSize / tileCount;
-      setBoard();
-      drawTiles();
-    };
+    // document.getElementById('scale').onchange = function() {
+    //   tileCount = this.value;
+    //   tileSize = boardSize / tileCount;
+    //   setBoard();
+    //   drawTiles();
+    // };
 
     document.getElementById('puzzle').onmousemove = function(e) {
       clickLoc.x = Math.floor((e.pageX - this.offsetLeft) / tileSize);
