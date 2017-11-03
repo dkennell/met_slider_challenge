@@ -39,7 +39,35 @@ function scalePreserveAspectRatio(imgW,imgH,maxW,maxH){
 loadPuzzle = function(){
   initializeGlobals()
   img = new Image();
-  img.src = "https://images.metmuseum.org/CRDImages/aa/original/DT778.jpg";
+  switch (document.getElementById("exhibit").value){
+    case "tugra":
+      var date = "ca. 1555–60"
+      var medium = "Ink, opaque watercolor, and gold on paper"
+      img.src = "https://images.metmuseum.org/CRDImages/is/original/DP234753.jpg"
+      break;
+    case "washstand":
+      var date = "1904"
+      var medium = "Oak, ceramic tile, colored and mirror glass, and lead"
+      img.src = "https://images.metmuseum.org/CRDImages/ma/original/DT1424.jpg"
+      break;
+    case "statuette":
+      var date = "Hellenistic Period, 3rd century B.C."
+      var medium = "Bronze"
+      img.src = "https://images.metmuseum.org/CRDImages/gr/original/DP104920.jpg"
+      break;
+    case "bottle":
+      var date = "8th–10th century"
+      var medium = "Ceramic"
+      img.src = "https://images.metmuseum.org/CRDImages/ao/original/DT4041.jpg"
+      break;
+    case "armor":
+      var date = "ca. 1400–1450 and later"
+      var medium = "Steel, copper alloy, textile, leather"
+      img.src = "https://images.metmuseum.org/CRDImages/aa/original/DT778.jpg";
+      break;
+
+  }
+
 
   img.height="1%"
   img.addEventListener('load', drawTiles, false);
@@ -95,6 +123,11 @@ function setListeners(){
     //   setBoard();
     //   drawTiles();
     // };
+    document.getElementById('exhibit').onchange = function() {
+      loadPuzzle()
+    };
+
+
 
     document.getElementById('puzzle').onmousemove = function(e) {
       clickLoc.x = Math.floor((e.pageX - this.offsetLeft) / tileSize);
