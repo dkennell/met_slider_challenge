@@ -1,24 +1,15 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This project is a sliding puzzle that was built as a 6-hour code challenge. It uses open-access pictures provided by the Metropolitan Museum of Art.
 
-Things you may want to cover:
+To install and use:
 
-* Ruby version
+* Clone the repo
 
-* System dependencies
+* Run 'bundle install'
 
-* Configuration
+* Run 'rails s'
 
-* Database creation
+* Navigate to 'localhost:3000' in your web brower
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* Have fun!
