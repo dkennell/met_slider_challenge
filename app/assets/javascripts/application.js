@@ -15,7 +15,33 @@
 //= require_tree .
 
 window.onload = function(){
+  loadStagingCanvas()
 	loadPuzzle()
+}
+
+loadStagingCanvas = function(){
+    c=document.getElementById("staging_canvas");
+    ctx=c.getContext("2d");
+    myImg = new Image();
+    myImg.src = "https://images.metmuseum.org/CRDImages/ao/web-large/DP147127.jpg";
+    myImg.onload=start;
+}
+
+function start(){
+  c.width=480;
+  c.height=480;
+  var w=myImg.width;
+  var h=myImg.height;
+  // resize img to fit in the canvas 
+  // You can alternately request img to fit into any specified width/height
+  var sizer=scalePreserveAspectRatio(w,h,c.width,c.height);
+  ctx.drawImage(myImg,0,0,w,h, c.width/2 - w*sizer/2, c.height/2 - h*sizer/2,w*sizer,h*sizer);
+}
+
+
+
+function scalePreserveAspectRatio(imgW,imgH,maxW,maxH){
+    return(Math.min((maxW/imgW),(maxH/imgH)));
 }
 
 loadPuzzle = function(){
