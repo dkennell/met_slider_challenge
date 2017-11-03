@@ -23,7 +23,7 @@ loadStagingCanvas = function(){
     c=document.getElementById("staging_canvas");
     ctx=c.getContext("2d");
     myImg = new Image();
-    myImg.src = "https://images.metmuseum.org/CRDImages/ao/web-large/DP147127.jpg";
+    myImg.src = "http://images.metmuseum.org/CRDImages/ad/original/DT163.jpg";
     myImg.onload=start;
 }
 
@@ -150,13 +150,16 @@ function checkSolved() {
   }
 
   function drawTiles() {
+    var sizingRatio = scalePreserveAspectRatio(img.width,img.height,480,480)
+
+
     context.clearRect ( 0 , 0 , boardSize , boardSize );
     for (var i = 0; i < tileCount; ++i) {
       for (var j = 0; j < tileCount; ++j) {
         x = boardParts[i][j].x;
         y = boardParts[i][j].y;
         if(i != emptyLoc.x || j != emptyLoc.y || solved == true) {
-          context.drawImage(img, x * tileSize, y * tileSize, tileSize, tileSize,
+          context.drawImage(img, x * tileSize*(1/sizingRatio), y * tileSize*(1/sizingRatio), tileSize*(1/sizingRatio), tileSize*(1/sizingRatio),
               i * tileSize, j * tileSize, tileSize, tileSize);
         }
       }
