@@ -2,9 +2,12 @@
 
 This project is a sliding puzzle that was built as a 6-hour code challenge. It uses open-access pictures provided by the Metropolitan Museum of Art.
 
-To install and use:
+## To play the game online, go to:
+https://met-sliding-puzzle.herokuapp.com/
 
-* Clone the repo
+## To download and play:
+
+* Clone the repo in terminal
 
 * Run 'bundle install'
 
